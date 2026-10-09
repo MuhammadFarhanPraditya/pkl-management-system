@@ -29,8 +29,18 @@ class AdminPanelProvider extends PanelProvider
             ->login(\App\Filament\Pages\Auth\CustomLogin::class)
             ->brandName('SMK - Jurnal PKL')
             ->colors([
-                'primary' => Color::Indigo,
+                'primary' => Color::hex('#3B82F6'),
+                'success' => Color::hex('#4ADE80'),
+                'danger'  => Color::hex('#FF4D4D'),
+                'warning' => Color::hex('#FB923C'),
+                'info'    => Color::hex('#3B82F6'),
+                'gray'    => Color::hex('#D1D5DB'),
             ])
+            ->font('Space Grotesk')
+            ->renderHook(
+                \Filament\View\PanelsRenderHook::HEAD_END,
+                fn (): string => \Illuminate\Support\Facades\Blade::render('@vite(\'resources/css/app.css\')')
+            )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
@@ -59,3 +69,4 @@ class AdminPanelProvider extends PanelProvider
             ]);
     }
 }
+
