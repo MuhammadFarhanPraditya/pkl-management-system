@@ -7,6 +7,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: 'Inter', system-ui, sans-serif; }
+        .activation-submit {
+            transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+        }
+        .activation-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(30, 64, 130, 0.2);
+        }
+        .activation-submit:active {
+            transform: translateY(0) scale(0.98);
+        }
+        .activation-submit:focus-visible {
+            outline: 3px solid rgba(59, 130, 246, 0.35);
+            outline-offset: 3px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .activation-submit { transition: none; }
+        }
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
@@ -54,7 +71,7 @@
                 </div>
 
                 <button type="submit"
-                    class="w-full mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors text-sm">
+                    class="activation-submit w-full mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-lg text-sm">
                     Verifikasi & Lanjutkan
                 </button>
             </form>

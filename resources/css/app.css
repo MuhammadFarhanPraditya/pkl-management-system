@@ -69,6 +69,533 @@ h1, h2, h3, h4,
     color: var(--nb-text) !important;
 }
 
+.student-login-page {
+    background: #edf0f5 !important;
+    color: #15223b !important;
+    min-height: 100vh !important;
+    overflow-x: hidden !important;
+}
+
+.student-login-page .fi-simple-layout,
+.student-login-page .fi-simple-main-ctn,
+.student-login-page .fi-simple-main {
+    position: relative;
+    z-index: 1;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+}
+
+.student-login-page .fi-simple-layout,
+.student-login-page .fi-simple-main-ctn {
+    min-height: 100vh !important;
+}
+
+.student-login-page .fi-simple-main {
+    min-height: 100vh !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+}
+
+.student-login-page .fi-simple-page {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.student-login-page .fi-simple-page-content {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0;
+    background: #edf0f5;
+    overflow: hidden;
+}
+
+.student-login-page .student-login-slider {
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: 3;
+    width: 50%;
+    height: 100%;
+    background: #edf0f5;
+    transform: translate3d(0, 0, 0);
+    transition: transform 820ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+.student-login-page .student-login-view {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    padding: clamp(112px, 17vh, 150px) clamp(30px, 6vw, 88px) 36px;
+}
+
+.student-login-page .student-login-view--login {
+    justify-content: flex-start;
+}
+
+.student-login-page .student-login-view--activation {
+    justify-content: flex-start;
+}
+
+.student-login-page .student-login-view-header {
+    width: 100%;
+    min-height: 126px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex: 0 0 126px;
+}
+
+.student-login-page .student-login-view-title {
+    margin: 0 0 18px;
+    color: #101e37 !important;
+    font: 800 clamp(2rem, 3vw, 3.2rem)/1.08 'Space Grotesk', sans-serif;
+    letter-spacing: 0.045em;
+    text-align: center;
+}
+
+.student-login-page .student-login-view-subheading {
+    display: flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    color: #46536a;
+    font-size: 0.98rem;
+    font-weight: 500;
+}
+
+.student-login-page .student-login-art-toggle {
+    position: absolute;
+    inset: 0 0 0 auto;
+    z-index: 2;
+    width: 50%;
+    overflow: hidden;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transform: translateX(0);
+    transition: transform 820ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+.student-login-page .student-login-art-toggle::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        linear-gradient(rgba(7, 19, 41, 0.08), rgba(7, 19, 41, 0.08)),
+        url('/images/login-building.png') center 42% / cover no-repeat;
+}
+
+.student-login-page .student-login-question-mark,
+.student-login-page .student-login-rocket {
+    display: none;
+}
+
+.student-login-page .student-login-art-toggle:focus-visible {
+    outline: 3px solid rgba(91, 222, 255, 0.85);
+    outline-offset: -8px;
+}
+
+.student-login-page .student-login-gsap-ready {
+    transition: none;
+}
+
+.student-login-page .student-login-slider.student-login-gsap-ready {
+    transition: none;
+}
+
+.student-login-page .student-login-question-mark {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    color: rgba(65, 205, 244, 0.3);
+    font: 800 clamp(8rem, 17vw, 15rem)/1 'Space Grotesk', sans-serif;
+    text-shadow: 0 0 42px rgba(69, 202, 255, 0.3);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.student-login-page .student-login-rocket {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: clamp(7rem, 15vw, 13rem);
+    line-height: 1;
+    filter: drop-shadow(0 0 26px rgba(64, 214, 255, 0.42));
+    transform: translate3d(-50%, -50%, 0) rotate(-12deg);
+    animation: student-login-float 5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.student-login-page .student-login-slider,
+.student-login-page .student-login-art-toggle {
+    backface-visibility: hidden;
+}
+
+.student-login-page .student-login-art-label {
+    position: absolute;
+    right: 24px;
+    bottom: 8vh;
+    left: 24px;
+    width: fit-content;
+    margin-inline: auto;
+    padding: 12px 22px;
+    border: 1px solid rgba(160, 235, 255, 0.38);
+    border-radius: 999px;
+    background: rgba(8, 26, 53, 0.72);
+    color: #e8faff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    box-shadow: 0 0 26px rgba(57, 194, 255, 0.16);
+    backdrop-filter: blur(8px);
+    transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.student-login-page .student-login-art-toggle:hover .student-login-art-label {
+    transform: translateY(-3px);
+    background: rgba(16, 47, 89, 0.9);
+    box-shadow: 0 0 34px rgba(57, 194, 255, 0.3);
+}
+
+.student-login-page .student-login-form-panel {
+    width: 100%;
+    margin-top: 26px;
+}
+
+.student-login-page .student-login-status,
+.student-login-page .student-activation-errors {
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px 15px;
+    border: 1px solid rgba(197, 71, 71, 0.2);
+    border-radius: 12px;
+    background: #fff2f2;
+    color: #a52d37;
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.student-login-page .student-login-status {
+    border-color: rgba(40, 126, 85, 0.2);
+    background: #eefaf3;
+    color: #246a48;
+}
+
+.student-login-page .student-activation-form {
+    width: 100%;
+    margin-top: 26px;
+}
+
+.student-login-page .student-activation-field + .student-activation-field {
+    margin-top: 18px;
+}
+
+.student-login-page .student-activation-field label {
+    display: block;
+    margin-bottom: 7px;
+    color: #34445f;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.student-login-page .student-activation-field input {
+    display: block;
+    width: 100%;
+    min-height: 56px;
+    padding: 14px 17px;
+    border: 1px solid rgba(30, 54, 91, 0.12);
+    border-radius: 15px;
+    outline: none;
+    background: #e3ebf6;
+    color: #15233d !important;
+    font: inherit;
+    transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.student-login-page .student-activation-field input:focus {
+    border-color: rgba(42, 123, 227, 0.55);
+    background: #f4f8ff;
+    box-shadow: 0 0 0 4px rgba(42, 123, 227, 0.12);
+}
+
+.student-login-page .student-activation-hint {
+    margin: 14px 0 0;
+    color: #64748b;
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.student-login-page .student-activation-submit {
+    width: 100%;
+    min-height: 56px;
+    margin-top: 22px;
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #102449 0%, #17458a 100%);
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 12px 24px rgba(24, 52, 94, 0.2);
+    transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.student-login-page .student-activation-submit:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #173263 0%, #2056a1 100%);
+    box-shadow: 0 16px 29px rgba(24, 52, 94, 0.27);
+}
+
+.student-login-page .student-activation-submit:focus-visible {
+    outline: 3px solid rgba(59, 130, 246, 0.45);
+    outline-offset: 3px;
+}
+
+.student-login-page .student-login-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    margin-left: 8px;
+    padding: 0 17px;
+    border: 1px solid rgba(20, 75, 151, 0.18);
+    border-radius: 999px;
+    background: #fff !important;
+    color: #123d80 !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+    box-shadow: 0 5px 14px rgba(23, 49, 88, 0.08);
+    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.student-login-page .student-login-link:hover {
+    transform: translateY(-2px);
+    border-color: rgba(20, 75, 151, 0.38);
+    background: #eaf3ff !important;
+    color: #0b2e68 !important;
+    box-shadow: 0 9px 20px rgba(23, 49, 88, 0.15);
+}
+
+.student-login-page .student-login-link:focus-visible {
+    outline: 3px solid rgba(36, 120, 232, 0.4);
+    outline-offset: 3px;
+}
+
+.student-login-page .fi-sc-form {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background: transparent;
+}
+
+.student-login-page .fi-grid {
+    width: 100%;
+}
+
+.student-login-page .fi-sc-form .fi-grid,
+.student-login-page .fi-sc-form .fi-grid-col {
+    width: 100%;
+}
+
+.student-login-page .fi-fo-field {
+    margin-bottom: 0 !important;
+    position: relative;
+}
+
+.student-login-page .fi-fo-field + .fi-fo-field {
+    margin-top: 18px !important;
+}
+
+.student-login-page .fi-fo-field-label {
+    margin-bottom: 2px !important;
+    color: #172b4d !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    line-height: 1.5 !important;
+    opacity: 1 !important;
+}
+
+.student-login-page .fi-fo-field-label-content {
+    color: #172b4d !important;
+    opacity: 1 !important;
+}
+
+.student-login-page .fi-fo-field-label-ctn {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+}
+
+.student-login-page .fi-fo-field-label-col .fi-sc-text {
+    color: #64748b !important;
+    font-size: 0.78rem !important;
+    line-height: 1.45 !important;
+}
+
+.student-login-page .fi-input-wrp {
+    border: 1px solid rgba(30, 54, 91, 0.1) !important;
+    border-radius: 15px !important;
+    background: #e3ebf6 !important;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.55) !important;
+    overflow: hidden !important;
+    transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.student-login-page .fi-input {
+    width: 100% !important;
+    min-height: 56px !important;
+    border: none !important;
+    background: #e3ebf6 !important;
+    color: #15233d !important;
+    font-size: 0.98rem !important;
+    font-weight: 500 !important;
+    padding: 15px 17px !important;
+    border-radius: 15px !important;
+}
+
+.student-login-page .fi-input-wrp:focus-within {
+    border-color: rgba(42, 123, 227, 0.55) !important;
+    background: #f4f8ff !important;
+    box-shadow: 0 0 0 4px rgba(42, 123, 227, 0.12) !important;
+}
+
+.student-login-page .fi-form-actions {
+    margin-top: 22px !important;
+}
+
+.student-login-page .fi-ac-btn-action {
+    width: 100% !important;
+    min-height: 56px !important;
+    border-radius: 15px !important;
+    border: none !important;
+    background: linear-gradient(135deg, #102449 0%, #17458a 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 12px 24px rgba(24, 52, 94, 0.2) !important;
+    letter-spacing: 0.08em !important;
+    font-size: 0.98rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.student-login-page .fi-ac-btn-action:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #173263 0%, #2056a1 100%) !important;
+    box-shadow: 0 16px 29px rgba(24, 52, 94, 0.27) !important;
+}
+
+.student-login-page .fi-ac-btn-action:focus {
+    outline: 2px solid rgba(59, 130, 246, 0.45) !important;
+    outline-offset: 3px !important;
+}
+
+.student-login-activation .student-login-slider {
+    transform: translate3d(100%, 0, 0);
+}
+
+.student-login-activation .student-login-art-toggle {
+    transform: translate3d(-100%, 0, 0);
+}
+
+.student-login-page .fi-sc-form .fi-grid-col:nth-child(2) {
+    position: relative;
+}
+
+.student-login-page .fi-sc-form .fi-grid-col:nth-child(2)::before {
+    content: "";
+    position: absolute;
+    right: -48px;
+    top: 4px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #63e4ff;
+    box-shadow: -37px 26px 0 -5px #63e4ff, 33px 70px 0 -6px #63e4ff;
+    filter: drop-shadow(0 0 8px rgba(82, 196, 255, 0.75));
+}
+
+.student-login-page .fi-sc-form .fi-grid-col:nth-child(3) {
+    display: none !important;
+}
+
+@keyframes student-login-float {
+    0%, 100% {
+        transform: translate3d(-50%, -50%, 0) rotate(-12deg);
+    }
+
+    50% {
+        transform: translate3d(-50%, calc(-50% - 14px), 0) rotate(-12deg);
+    }
+}
+
+@media (max-width: 760px) {
+    .student-login-page .fi-simple-page-content {
+        min-height: 100vh;
+        overflow-y: auto;
+    }
+
+    .student-login-page .student-login-slider {
+        position: relative;
+        height: 100vh;
+        min-height: 100vh;
+        width: 100%;
+        transform: none !important;
+    }
+
+    .student-login-page .student-login-art-toggle {
+        display: none;
+    }
+
+    .student-login-page .student-login-view {
+        min-height: 100vh;
+        padding: 48px 28px 40px;
+    }
+
+    .student-login-page .student-activation-form {
+        margin-top: 20px;
+    }
+
+    .student-login-page .student-login-view-header {
+        flex-basis: 126px;
+        min-height: 126px;
+    }
+
+    .student-login-page .student-login-view-title {
+        font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
+    }
+
+    .student-login-page .fi-sc-form .fi-grid-col:nth-child(2)::before {
+        right: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .student-login-page *,
+    .student-login-page *::before,
+    .student-login-page *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 /* =============================================
    SIDEBAR (Navigation)
    ============================================= */
@@ -90,10 +617,23 @@ h1, h2, h3, h4,
 }
 
 .fi-logo {
-    color: #0D0D0D !important; /* hitam di light mode, terlihat di atas background card */
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    color: var(--nb-text) !important;
     font-family: 'Space Grotesk', sans-serif !important;
     font-weight: 800 !important;
-    font-size: 1.1rem !important;
+    font-size: 1rem !important;
+    text-decoration: none !important;
+}
+
+.fi-logo img {
+    height: 2.25rem !important;
+    width: auto !important;
+    object-fit: contain !important;
+    border-radius: 4px;
+    background: #FFFFFF;
+    padding: 2px 4px;
 }
 
 /* Nav Items */
@@ -496,8 +1036,3 @@ input[type="search"]:focus {
     color: var(--nb-text) !important;
     box-shadow: var(--nb-shadow-sm) !important;
 }
-
-
-
-
-

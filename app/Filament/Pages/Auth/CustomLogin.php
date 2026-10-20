@@ -2,27 +2,61 @@
 
 namespace App\Filament\Pages\Auth;
 
+use Filament\Actions\Action;
 use Filament\Auth\Pages\Login as BaseLogin;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Support\HtmlString;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Component;
 
 class CustomLogin extends BaseLogin
 {
-    /**
-     * Tambahkan link Aktivasi Akun di bawah heading login.
-     */
-    public function getSubheading(): string|Htmlable|null
+    protected string $view = 'filament.pages.auth.student-login';
+
+    public function hasLogo(): bool
     {
-        $parent = parent::getSubheading();
+        return false;
+    }
 
-        if ($parent !== null) {
-            return $parent;
-        }
+    public function getExtraBodyAttributes(): array
+    {
+        $isActivationMode = request()->query('mode') === 'activation' ? 'true' : 'false';
 
-        $activateUrl = route('activate.form');
+        return [
+            'class' => 'student-login-page',
+            'x-data' => "{ activationMode: {$isActivationMode}, toggleActivation() { this.activationMode = ! this.activationMode; const url = new URL(window.location); if (this.activationMode) { url.searchParams.set('mode', 'activation'); } else { url.searchParams.delete('mode'); } window.history.replaceState({}, '', url); } }",
+            'x-bind:class' => "{ 'student-login-activation': activationMode }",
+        ];
+    }
 
-        return new HtmlString(
-            'Belum punya akun? <a href="' . $activateUrl . '" class="text-primary-600 hover:text-primary-500 font-semibold underline">Aktivasi Akun</a>'
-        );
+    public function getHeading(): ?string
+    {
+        return 'STUDENT LOGIN';
+    }
+
+    protected function getEmailFormComponent(): Component
+    {
+        return TextInput::make('email')
+            ->label('Email')
+            ->email()
+            ->required()
+            ->autocomplete()
+            ->autofocus();
+    }
+
+    protected function getPasswordFormComponent(): Component
+    {
+        return TextInput::make('password')
+            ->label('Password')
+            ->password()
+            ->hint(filament()->hasPasswordReset() ? new \Illuminate\Support\HtmlString('<a href="' . filament()->getRequestPasswordResetUrl() . '" style="color: var(--nb-primary); font-size: 0.8rem; font-weight: 700; text-decoration: underline;">Lupa Kata Sandi?</a>') : null)
+            ->revealable(filament()->arePasswordsRevealable())
+            ->autocomplete('current-password')
+            ->required();
+    }
+
+    protected function getAuthenticateFormAction(): Action
+    {
+        return Action::make('authenticate')
+            ->label('LOGIN')
+            ->submit('authenticate');
     }
 }

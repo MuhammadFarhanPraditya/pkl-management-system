@@ -27,7 +27,10 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(\App\Filament\Pages\Auth\CustomLogin::class)
-            ->brandName('SMK - Jurnal PKL')
+            ->passwordReset()
+            ->brandName('SMK PUSTEK - Jurnal PKL')
+            ->brandLogo(asset('images/logo-pustek.png'))
+            ->brandLogoHeight('2.5rem')
             ->colors([
                 'primary' => Color::hex('#3B82F6'),
                 'success' => Color::hex('#4ADE80'),
@@ -48,10 +51,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
+                \App\Filament\Widgets\AdminDashboardWidget::class,
                 \App\Filament\Widgets\TeacherDashboardWidget::class,
                 \App\Filament\Widgets\TodayAttendanceWidget::class,
                 \App\Filament\Widgets\PklStatsOverview::class,
-                AccountWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

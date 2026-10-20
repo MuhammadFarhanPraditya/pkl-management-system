@@ -35,7 +35,8 @@ class StudentResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        $query = parent::getEloquentQuery();
+        $query = parent::getEloquentQuery()
+            ->with(['user', 'company', 'teacher.user']);
 
         // Guru hanya melihat siswa bimbingannya
         if (auth()->user()?->isTeacher()) {

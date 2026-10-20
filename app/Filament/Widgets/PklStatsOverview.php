@@ -12,6 +12,12 @@ class PklStatsOverview extends StatsOverviewWidget
 {
     protected static ?int $sort = 1;
 
+    public static function canView(): bool
+    {
+        $user = auth()->user();
+        return $user && ($user->isStudent() || $user->isTeacher());
+    }
+
     protected function getStats(): array
     {
         $user = auth()->user();
@@ -67,24 +73,7 @@ class PklStatsOverview extends StatsOverviewWidget
             ];
         }
 
-        // Admin Stats
-        $totalStudents = Student::count();
-        $totalCompanies = Company::count();
-        $totalPending = DailyJournal::where('status', 'submitted')->count();
-
-        return [
-            Stat::make('Total Siswa PKL', $totalStudents)
-                ->description('Kelas 11 yang terdaftar')
-                ->icon('heroicon-o-academic-cap')
-                ->color('primary'),
-            Stat::make('Mitra DU-DI', $totalCompanies)
-                ->description('Perusahaan / Tempat Magang')
-                ->icon('heroicon-o-building-office-2')
-                ->color('info'),
-            Stat::make('Jurnal Pending Se-Sekolah', $totalPending)
-                ->description('Menunggu persetujuan guru')
-                ->icon('heroicon-o-clock')
-                ->color('warning'),
-        ];
+        // Admin Stats - Digantikan oleh AdminDashboardWidget yang jauh lebih lengkap dan interaktif
+        return [];
     }
 }

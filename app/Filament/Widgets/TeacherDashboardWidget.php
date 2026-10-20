@@ -31,12 +31,18 @@ class TeacherDashboardWidget extends Widget
         $students    = $teacher?->students()->with('user', 'company')->get() ?? collect();
         $teacherId   = $teacher?->id;
 
-        $pendingJournals = DailyJournal::whereHas('student', fn ($q) => $q->where('teacher_id', $teacherId))
+        $pendingCount = DailyJournal::whereHas('student', fn ($q) => $q->where('teacher_id', $teacherId))
             ->where('status', 'submitted')
-            ->with('student.user')
-            ->latest('date')
-            ->limit(5)
-            ->get();
+            ->count();
+
+        $pendingJournals = $pendingCount > 0
+            ? DailyJournal::whereHas('student', fn ($q) => $q->where('teacher_id', $teacherId))
+                ->where('status', 'submitted')
+                ->with('student.user:id,name')
+                ->latest('date')
+                ->limit(5)
+                ->get()
+            : collect();
 
         $studentsNoPlacement = $students->whereNull('company_id');
 
@@ -46,7 +52,7 @@ class TeacherDashboardWidget extends Widget
             'teacher'             => $teacher,
             'students'            => $students,
             'studentsCount'       => $students->count(),
-            'pendingCount'        => DailyJournal::whereHas('student', fn ($q) => $q->where('teacher_id', $teacherId))->where('status', 'submitted')->count(),
+            'pendingCount'        => $pendingCount,
             'pendingJournals'     => $pendingJournals,
             'studentsNoPlacement' => $studentsNoPlacement,
             'profileComplete'     => $profileComplete,
